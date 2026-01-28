@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knack Natural Materials | The Future of Food Packaging</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --watermelon: #FB535B;
+            --coral: #FC7C83;
+            --sky: #76BFD6;
+            --teal: #2F839D;
+            --midnight: #0B1426;
+            --charcoal: #151B2D;
+            --paper: #F4F2EF;
+            --paper-craft: #D4C5B5;
+            --pistachio: #90A955;
+            --gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--midnight);
+            color: var(--paper);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--watermelon);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(251, 83, 91, 0.5);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        body.hovering .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(251, 83, 91, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 35px;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--paper);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--watermelon);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+            padding: 0 4rem;
+            background: var(--midnight);
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--coral);
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--coral);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 6rem);
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--sky) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: rgba(244, 242, 239, 0.6);
+            max-width: 500px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--coral) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(251,83,91,0.3);
+            letter-spacing: 0.05em;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(251,83,91,0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--sky);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--sky);
+            transition: all 0.3s;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-secondary:hover {
+            background: var(--sky);
+            color: var(--midnight);
+            border-color: var(--sky);
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            z-index: 10;
+            padding-right: 2rem;
+        }
+
+        .hero-stats-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .stat-item {
+            position: relative;
+            padding-right: 2rem;
+            border-right: 3px solid var(--watermelon);
+        }
+
+        .stat-number-large {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--watermelon);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label-large {
+            font-size: 0.9rem;
+            color: rgba(244, 242, 239, 0.6);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            max-width: 200px;
+            line-height: 1.4;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(251,83,91,0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            animation: breathe 6s infinite alternate;
+            right: -10%;
+            top: 20%;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .scroll-line {
+            position: absolute;
+            bottom: 4rem;
+            left: 4rem;
+            width: 1px;
+            height: 100px;
+            background: rgba(244, 242, 239, 0.1);
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: var(--watermelon);
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(400%); }
+        }
+
+        /* THE DILEMMA SECTION - NEW LAYOUT */
+        .problem-section {
+            padding: 6rem 4rem;
+            background: var(--charcoal);
+        }
+
+        .section-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            color: var(--watermelon);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            display: block;
+        }
+
+        .dilemma-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .dilemma-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .dilemma-stat-item {
+            position: relative;
+            padding-right: 2rem;
+            border-right: 3px solid var(--watermelon);
+        }
+
+        .dilemma-stat-item:nth-child(2) {
+            border-right-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dilemma-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .dilemma-stat-item:nth-child(1) .dilemma-stat-number {
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dilemma-stat-item:nth-child(2) .dilemma-stat-number {
+            color: white;
+        }
+
+        .dilemma-stat-label {
+            font-size: 0.9rem;
+            color: rgba(244, 242, 239, 0.6);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            max-width: 280px;
+            line-height: 1.4;
+        }
+
+        .dilemma-message h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            line-height: 1.1;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .dilemma-message h2 span {
+            display: block;
+        }
+
+        .dilemma-message h2 span:nth-child(1),
+        .dilemma-message h2 span:nth-child(2) {
+            color: white;
+        }
+
+        .dilemma-message h2 span:nth-child(3) {
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        /* WVTR COMPARISON - MINIMAL */
+        .dilemma-comparison {
+            max-width: 1200px;
+            margin: 6rem auto 0;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 4rem;
+        }
+
+        .comparison-item {
+            flex: 1;
+        }
+
+        .comparison-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .comparison-label span:first-child {
+            color: white;
+            font-weight: 500;
+        }
+
+        .comparison-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .comparison-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .plastic-bar {
+            width: 5%;
+            background: white;
+        }
+
+        .paper-bar {
+            width: 95%;
+            background: linear-gradient(90deg, var(--watermelon), var(--coral));
+        }
+
+        .comparison-note {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            color: rgba(244, 242, 239, 0.6);
+        }
+
+        .comparison-note strong {
+            color: var(--watermelon);
+            font-weight: 600;
+        }
+
+        /* INNOVATION SECTION */
+        .innovation-section {
+            padding: 10rem 4rem;
+            background: var(--midnight);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .innovation-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .innovation-text {
+            position: relative;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--coral);
+            font-weight: 600;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--watermelon), var(--coral));
+        }
+
+        .catch-phrase {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .catch-phrase span {
+            display: block;
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--sky) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .innovation-description {
+            font-size: 1.1rem;
+            color: rgba(244, 242, 239, 0.7);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .feature-list li {
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--watermelon);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .innovation-interactive {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px;
+        }
+
+        .paper-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 4/3;
+            background-image: url('natural paper.jpeg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow: visible;
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .paper-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .paper-wrapper:hover {
+            transform: rotateY(-5deg) rotateX(5deg) translateY(-10px);
+        }
+
+        .paper-text {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .paper-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            color: #3D2817;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        }
+
+        .paper-badge {
+            display: inline-block;
+             background: linear-gradient(135deg, var(--watermelon) 0%, var(--sky) 100%);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(251,83,91,0.3);
+            margin-top: 1rem;
+        }
+
+        .paper-badge span {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: white;
+            font-weight: 700;
+        }
+
+        .cartoon-nuts-container {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -30px;
+            z-index: 20;
+            animation: nutFloat 6s ease-in-out infinite;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+        }
+
+        .cartoon-nuts {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes nutFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .freshness-indicator {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            background: rgba(255,255,255,0.95);
+            padding: 0.75rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--pistachio);
+            letter-spacing: 0.05em;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 30;
+            animation: popIn 0.5s ease-out 0.5s backwards;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* PERFORMANCE SECTION */
+        .performance-section {
+            padding: 6rem 4rem;
+            background: var(--charcoal);
+        }
+
+        .perf-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 6rem auto 0;
+        }
+
+        .perf-card {
+            border-left: 2px solid rgba(255,255,255,0.1);
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .perf-card::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            width: 2px;
+            height: 0;
+            background: linear-gradient(180deg, var(--watermelon), var(--sky));
+            transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .perf-card.animate::before {
+            height: 100%;
+        }
+
+        .perf-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--watermelon);
+            margin-bottom: 1rem;
+        }
+
+        .perf-label {
+            font-size: 0.9rem;
+            color: rgba(244, 242, 239, 0.6);
+            line-height: 1.5;
+        }
+
+        /* MARKET SECTION */
+        .market-section {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--sky) 100%);
+            border-radius: 40px;
+            margin: 0 5%;
+            color: white;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .market-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .market-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 10rem 4rem;
+            text-align: center;
+            background: var(--midnight);
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--coral) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-size: 1rem;
+            box-shadow: 0 10px 40px rgba(251,83,91,0.3);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(251,83,91,0.4);
+        }
+
+        .cta-note {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: rgba(244, 242, 239, 0.4);
+            letter-spacing: 0.05em;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 4rem;
+            background: var(--charcoal);
+            text-align: center;
+            color: rgba(244, 242, 239, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--paper);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 20, 38, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--charcoal);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--paper);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .modal h3 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .modal p {
+            color: rgba(244, 242, 239, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(244, 242, 239, 0.8);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            color: var(--paper);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--watermelon);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--coral) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-right {
+                display: none;
+            }
+
+            .dilemma-container {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .dilemma-stats {
+                align-items: flex-start;
+                text-align: left;
+                order: 2;
+            }
+
+            .dilemma-stat-item {
+                padding-right: 0;
+                padding-left: 2rem;
+                border-right: none;
+                border-left: 3px solid var(--watermelon);
+            }
+
+            .dilemma-stat-item:nth-child(2) {
+                border-left-color: rgba(255, 255, 255, 0.2);
+                border-right: none;
+            }
+
+            .dilemma-message {
+                order: 1;
+            }
+
+            .comparison-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .innovation-container {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            
+            .innovation-interactive {
+                order: -1;
+            }
+
+            .paper-wrapper {
+                max-width: 400px;
+            }
+
+            .market-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .perf-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .perf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .market-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cartoon-nuts-container {
+                width: 160px;
+                height: 160px;
+                bottom: -40px;
+                right: -20px;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .cta-primary, .cta-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- MODAL FOR INVESTMENT DECK -->
+    <div class="modal" id="deckModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h3>Request Investor Deck</h3>
+            <p>Please provide your email address and we'll send the pitch deck to you.</p>
+            <form onsubmit="sendDeckRequest(event)">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="userName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="userEmail" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Company/Organization</label>
+                    <input type="text" id="userCompany" placeholder="Optional">
+                </div>
+                <button type="submit" class="submit-btn">Request Deck</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo-wrap">
+            <img src="knack-logo.png" alt="Knack" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#problem">The Dilemma</a></li>
+            <li><a href="#innovation">Our Innovation</a></li>
+            <li><a href="#performance">Performance</a></li>
+            <li><a href="#invest">Invest</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-left">
+            <div class="hero-tag">Series A Investment Opportunity</div>
+            <h1>
+                The End of
+                <span>Plastic Packaging</span>
+            </h1>
+            <p class="hero-desc">
+                We've transformed clay into a scalable, high-performance moisture barrier coating 
+                that makes paper packaging rival plastic—without the environmental burden. 
+                Protecting food, extending shelf life, and eliminating plastic waste.
+            </p>
+            
+            <div class="cta-group">
+                <button class="cta-primary" onclick="openModal()">
+                    View Investment Deck
+                    <span>→</span>
+                </button>
+                <a href="#innovation" class="cta-secondary">See the Technology</a>
+            </div>
+        </div>
+        
+        <div class="hero-right">
+            <div class="gradient-orb"></div>
+            <div class="hero-stats-vertical">
+                <div class="stat-item">
+                    <div class="stat-number-large">29M</div>
+                    <div class="stat-label-large">Tons of plastic packaging annually</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-large">9%</div>
+                    <div class="stat-label-large">Actually gets recycled</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-large">11M</div>
+                    <div class="stat-label-large">Metric tons enter oceans yearly</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-line"></div>
+    </section>
+
+    <!-- THE DILEMMA SECTION - NEW ASYMMETRIC LAYOUT -->
+    <section id="problem" class="problem-section">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <span class="section-num">02 — The Dilemma</span>
+            
+            <div class="dilemma-container">
+                <!-- Left: Vertical Stats (Contrasts with Hero's right stats) -->
+                <div class="dilemma-stats">
+                    <div class="dilemma-stat-item">
+                        <div class="dilemma-stat-number">$940B</div>
+                        <div class="dilemma-stat-label">Economic cost of food loss & waste globally</div>
+                    </div>
+                    
+                    <div class="dilemma-stat-item">
+                        <div class="dilemma-stat-number">13%</div>
+                        <div class="dilemma-stat-label">Lost between harvest & retail due to inadequate protection</div>
+                    </div>
+                </div>
+
+                <!-- Right: The Message (Contrasts with Hero's left text) -->
+                <div class="dilemma-message">
+                    <h2>
+                        <span>Paper can't protect.</span>
+                        <span>Plastic won't degrade.</span>
+                        <span>Food goes to waste.</span>
+                    </h2>
+                </div>
+            </div>
+
+            <!-- WVTR Comparison Bars -->
+            <div class="dilemma-comparison">
+                <div class="comparison-row">
+                    <div class="comparison-item">
+                        <div class="comparison-label">
+                            <span>Plastic Film</span>
+                            <span style="color: var(--sky); font-weight: 600;">1-3 g/m²/day</span>
+                        </div>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar-fill plastic-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-item">
+                        <div class="comparison-label">
+                            <span>Current Paper Coatings</span>
+                            <span style="color: var(--watermelon); font-weight: 600;">68-80 g/m²/day</span>
+                        </div>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar-fill paper-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="comparison-note">
+                    Paper coatings transmit <strong>25x more moisture</strong> than plastic. 
+                    Food spoils before it reaches the shelf.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INNOVATION SECTION -->
+    <section id="innovation" class="innovation-section">
+        <div class="innovation-container">
+            
+            <!-- LEFT: Natural Paper Wrapper with Floating Cartoon Nuts -->
+            <div class="innovation-interactive">
+                <div class="paper-wrapper">
+                    <div class="freshness-indicator"> Extended Freshness</div>
+                    
+                    <div class="paper-text">
+                        <div class="paper-brand">Protected by Knack</div>
+                        <div class="paper-badge">
+                            <span>Natural Clay Barrier</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cartoon-nuts-container">
+                        <img src="nuts-cartoon.png" alt="Fresh nuts protected by Knack coating" class="cartoon-nuts">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Text Content -->
+            <div class="innovation-text">
+                <div class="section-label">Our Innovation</div>
+                
+                <h2 class="catch-phrase">
+                    Clay Coated Paper.<br>
+                    <span>Plastic Performance.</span>
+                </h2>
+                
+                <p class="innovation-description">
+                    Our proprietary clay-based formulation creates a monolithic gas and moisture barrier 
+                    at the nanoscale level. Applied to standard paper substrates using existing manufacturing 
+                    infrastructure, it transforms renewable resources into high-performance packaging that 
+                    keeps food fresh longer without plastic.
+                </p>
+                
+                <ul class="feature-list">
+                    <li>Water vapor transmission rate: <strong>4-9 g/m²/day</strong> (vs. 68-80 competitors)</li>
+                    <li>Compostable, marine biodegradable, and recyclable in paper stream</li>
+                    <li>Zero PFAS, zero plastic, fully biodegradable paper substrate</li>
+                    <li>Abundant raw material, scalable manufacturing/li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PERFORMANCE -->
+    <section id="performance" class="performance-section">
+        <div class="section-num" style="max-width: 1400px; margin: 0 auto 4rem; display: block; text-align: center;">03 — Performance</div>
+        <h2 class="section-title" style="text-align: center; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; margin-bottom: 4rem;">
+            We don't reveal our formula.<br>
+            <span style="color: var(--watermelon);">Just our results.</span>
+        </h2>
+
+        <div class="perf-grid">
+            <div class="perf-card">
+                <div class="perf-value">4-9</div>
+                <div class="perf-label">Water Vapor Transmission<br><span style="opacity: 0.6;">vs. 68-80 competitors</span></div>
+            </div>
+            
+            <div class="perf-card">
+                <div class="perf-value">&lt;3</div>
+                <div class="perf-label">Micron Coating Thickness<br><span style="opacity: 0.6;">Half the thickness of plastic</span></div>
+            </div>
+            
+            <div class="perf-card">
+                <div class="perf-value">100%</div>
+                <div class="perf-label">Natural Composition<br><span style="opacity: 0.6;">Clay & mineral based</span></div>
+            </div>
+            
+            <div class="perf-card">
+                <div class="perf-value">250</div>
+                <div class="perf-label">Years Feedstock Supply<br><span style="opacity: 0.6;">Abundant reserves</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKET -->
+    <section class="market-section">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <div class="section-num" style="color: rgba(255,255,255,0.8); display: block; margin-bottom: 2rem;">04 — Market Opportunity</div>
+            <h2 style="color: white; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; margin-bottom: 1rem;">The $950M Beachhead</h2>
+            <p style="opacity: 0.9; font-size: 1.1rem;">
+                Paper mills can double profitability while eliminating plastic. 
+                The technology to unlock this market is here.
+            </p>
+        </div>
+
+        <div class="market-grid">
+            <div>
+                <div class="market-number">$145B</div>
+                <div class="market-label">Total Flexible Packaging</div>
+            </div>
+            <div>
+                <div class="market-number">$50B</div>
+                <div class="market-label">High-Barrier Food Segment</div>
+            </div>
+            <div>
+                <div class="market-number">2x</div>
+                <div class="market-label">Mill Profitability Increase</div>
+            </div>
+            <div>
+                <div class="market-number">2030</div>
+                <div class="market-label">Regulatory Deadline</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="invest" class="cta-section">
+        <div class="section-num" style="display: block; margin-bottom: 2rem;">05 — Investment</div>
+        <h2 class="section-title" style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 1.5rem;">Join the Paper Revolution</h2>
+        <p style="color: rgba(244, 242, 239, 0.6); max-width: 600px; margin: 0 auto 2rem;">
+            We're raising $ to scale manufacturing capacity and commercialize partnerships 
+            with global CPG brands. Backed by proven inventors who've scaled advanced materials before.
+        </p>
+        
+        <button class="cta-button" onclick="openModal()">
+            Contact Knack
+        </button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">Knack Natural Materials</div>
+        <p>© 2026 Knack Natural Materials. All rights reserved. Confidential & Proprietary.</p>
+    </footer>
+
+    <script>
+        // Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        document.querySelectorAll('a, .cta-button, .cta-primary, .cta-secondary, .paper-wrapper').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from(".hero-left > *", {
+            y: 60,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        gsap.from(".hero-stats-vertical .stat-item", {
+            x: 60,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.8
+        });
+
+        ScrollTrigger.create({
+            trigger: ".perf-grid",
+            start: "top 80%",
+            onEnter: () => {
+                document.querySelectorAll('.perf-card').forEach((card, i) => {
+                    setTimeout(() => card.classList.add('animate'), i * 200);
+                });
+            }
+        });
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('deckModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('deckModal').classList.remove('active');
+        }
+
+        function sendDeckRequest(e) {
+            e.preventDefault();
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const company = document.getElementById('userCompany').value;
+            
+            const subject = `Investor Deck Request from ${name}`;
+            const body = `Hello Knack Team,%0D%0A%0D%0AI would like to request the investor deck.%0D%0A%0D%0AName: ${name}%0D%0AEmail: ${email}%0D%0ACompany: ${company || 'N/A'}%0D%0A%0D%0ABest regards`;
+            
+            window.location.href = `mailto:info@knacknatural.com?subject=${subject}&body=${body}`;
+            closeModal();
+            
+            setTimeout(() => {
+                alert(`Thank you ${name}! Your request has been sent to info@knacknatural.com. We'll send the deck to ${email} shortly.`);
+            }, 500);
+        }
+
+        document.getElementById('deckModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
