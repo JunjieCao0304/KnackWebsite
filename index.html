@@ -7,6 +7,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
+        /*
+        ============================================
+        KNACK NATURAL MATERIALS - BRAND COLORS
+        ============================================
+        Official Gradient Palette:
+        - #FB535B (251, 83, 91): Watermelon red
+        - #FC7C83 (252, 124, 131): Coral pink
+        - #76BFD6 (118, 191, 214): Sky blue
+        - #2F839D (47, 131, 157): Deep teal-blue
+        
+        Usage: linear-gradient(135deg, #FB535B, #FC7C83)
+               or linear-gradient(135deg, #FB535B, #76BFD6)
+        ============================================
+        */
+        
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
         :root {
@@ -148,6 +163,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 8rem 0;
+            padding-right: 2rem;
             position: relative;
             z-index: 10;
         }
@@ -172,7 +188,7 @@
 
         .hero h1 {
             font-size: clamp(3rem, 6vw, 6rem);
-            line-height: 0.95;
+            line-height: 1.1;
             margin-bottom: 2rem;
             font-weight: 300;
         }
@@ -188,7 +204,7 @@
         .hero-desc {
             font-size: 1.1rem;
             color: rgba(244, 242, 239, 0.6);
-            max-width: 500px;
+            max-width: 600px;
             line-height: 1.8;
             margin-bottom: 3rem;
         }
@@ -423,73 +439,6 @@
             font-weight: 600;
         }
 
-        /* WVTR COMPARISON - MINIMAL */
-        .dilemma-comparison {
-            max-width: 1200px;
-            margin: 6rem auto 0;
-            padding-top: 4rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .comparison-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            gap: 4rem;
-        }
-
-        .comparison-item {
-            flex: 1;
-        }
-
-        .comparison-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .comparison-label span:first-child {
-            color: white;
-            font-weight: 500;
-        }
-
-        .comparison-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .comparison-bar-fill {
-            height: 100%;
-            border-radius: 3px;
-        }
-
-        .plastic-bar {
-            width: 5%;
-            background: white;
-        }
-
-        .paper-bar {
-            width: 95%;
-            background: linear-gradient(90deg, var(--watermelon), var(--coral));
-        }
-
-        .comparison-note {
-            text-align: center;
-            margin-top: 3rem;
-            font-size: 1.1rem;
-            color: rgba(244, 242, 239, 0.6);
-        }
-
-        .comparison-note strong {
-            color: var(--watermelon);
-            font-weight: 600;
-        }
-
         /* INNOVATION SECTION */
         .innovation-section {
             padding: 10rem 4rem;
@@ -575,6 +524,237 @@
             font-size: 1.2rem;
         }
 
+        /* PERFORMANCE SPECTRUM VISUALIZATION */
+        .wvtr-performance {
+            margin: 3rem 0;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(251,83,91,0.03), rgba(118,191,214,0.03));
+            border-radius: 16px;
+            border: 1px solid rgba(251,83,91,0.1);
+        }
+
+        .wvtr-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #FB535B, #76BFD6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .performance-spectrum {
+            margin-bottom: 2rem;
+        }
+
+        .spectrum-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .spectrum-track {
+            position: relative;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                rgba(139,115,85,0.4) 0%,
+                rgba(251,83,91,0.25) 40%,
+                rgba(118,191,214,0.35) 70%,
+                rgba(47,131,157,0.4) 100%
+            );
+            border-radius: 4px;
+            margin: 2.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .spectrum-marker {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .marker-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .marker-label {
+            position: absolute;
+            top: -2.2rem;
+            white-space: nowrap;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .marker-sublabel {
+            position: absolute;
+            top: 2.2rem;
+            white-space: nowrap;
+            font-size: 0.65rem;
+            color: rgba(244, 242, 239, 0.5);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Paper Marker - Far Left */
+        .marker-paper {
+            left: 0%;
+        }
+
+        .marker-paper .marker-dot {
+            background: linear-gradient(135deg, #8B7355, #A0826D);
+            border: 2px solid #8B7355;
+            box-shadow: 0 0 10px rgba(139,115,85,0.3);
+        }
+
+        .marker-paper .marker-label {
+            color: #A0826D;
+            max-width: 80px;
+            top: -2.2rem;
+        }
+
+        .marker-paper .marker-sublabel {
+            color: rgba(160,130,109,0.5);
+        }
+
+        /* Knack Marker - Very Close to Plastic */
+        .marker-knack {
+            left: 88%;
+        }
+
+        .marker-knack .marker-dot {
+            background: linear-gradient(135deg, #FB535B, #FC7C83);
+            border: 2px solid #FB535B;
+            box-shadow: 
+                0 0 20px rgba(251,83,91,0.6),
+                0 0 40px rgba(252,124,131,0.3);
+            animation: knackPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes knackPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 0 20px rgba(251,83,91,0.6),
+                    0 0 40px rgba(252,124,131,0.3);
+            }
+            50% { 
+                transform: scale(1.2);
+                box-shadow: 
+                    0 0 40px rgba(251,83,91,0.8),
+                    0 0 60px rgba(118,191,214,0.4);
+            }
+        }
+
+        .marker-knack .marker-label {
+            background: linear-gradient(135deg, #FB535B, #76BFD6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 0.85rem;
+            top: -1.2rem;
+        }
+
+        /* Plastic Marker - Far Right */
+        .marker-plastic {
+            left: 98%;
+        }
+        .marker-knack .marker-sublabel {
+            background: linear-gradient(135deg, #FC7C83, #76BFD6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.8;
+            top: 3.6rem;
+        }
+
+        .marker-plastic .marker-dot {
+            background: linear-gradient(135deg, #2C3E50, #34495E);
+            border: 2px solid #2C3E50;
+            box-shadow: 0 0 15px rgba(44,62,80,0.4);
+        }
+
+        .marker-plastic .marker-label {
+            color: #576574;
+        }
+
+        .marker-plastic .marker-sublabel {
+            color: rgba(87,101,116,0.5);
+        }
+
+        /* Distance Indicator */
+        .distance-indicator {
+            position: absolute;
+            top: -4.5rem;
+            left: 88%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .distance-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FB535B, #76BFD6);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: white;
+            box-shadow: 0 4px 15px rgba(251,83,91,0.3);
+            animation: badgeBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .wvtr-highlight {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(251,83,91,0.08), rgba(47,131,157,0.08));
+            border-radius: 12px;
+            border: 1px solid rgba(118,191,214,0.2);
+        }
+
+        .wvtr-highlight-text {
+            font-size: 1rem;
+            color: rgba(244, 242, 239, 0.9);
+            line-height: 1.6;
+        }
+
+        .wvtr-highlight-text strong {
+            background: linear-gradient(135deg, #FB535B, #76BFD6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .wvtr-highlight-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FB535B, #FC7C83, #76BFD6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
         .innovation-interactive {
             display: flex;
             justify-content: center;
@@ -638,7 +818,7 @@
 
         .paper-badge {
             display: inline-block;
-             background: linear-gradient(135deg, var(--watermelon) 0%, var(--sky) 100%);
+            background: linear-gradient(135deg, var(--watermelon) 0%, var(--sky) 100%);
             padding: 0.6rem 1.2rem;
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(251,83,91,0.3);
@@ -679,14 +859,14 @@
             position: absolute;
             top: -20px;
             left: -20px;
-            background: rgba(255,255,255,0.95);
+            background: linear-gradient(135deg, #29AB87, #4CBB17);
             padding: 0.75rem 1rem;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--pistachio);
+            color: white;
             letter-spacing: 0.05em;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(251,83,91,0.4);
             z-index: 30;
             animation: popIn 0.5s ease-out 0.5s backwards;
             display: flex;
@@ -697,55 +877,6 @@
         @keyframes popIn {
             from { transform: scale(0); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
-        }
-
-        /* PERFORMANCE SECTION */
-        .performance-section {
-            padding: 6rem 4rem;
-            background: var(--charcoal);
-        }
-
-        .perf-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 6rem auto 0;
-        }
-
-        .perf-card {
-            border-left: 2px solid rgba(255,255,255,0.1);
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .perf-card::before {
-            content: '';
-            position: absolute;
-            left: -2px;
-            top: 0;
-            width: 2px;
-            height: 0;
-            background: linear-gradient(180deg, var(--watermelon), var(--sky));
-            transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .perf-card.animate::before {
-            height: 100%;
-        }
-
-        .perf-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--watermelon);
-            margin-bottom: 1rem;
-        }
-
-        .perf-label {
-            font-size: 0.9rem;
-            color: rgba(244, 242, 239, 0.6);
-            line-height: 1.5;
         }
 
         /* MARKET SECTION */
@@ -807,13 +938,6 @@
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 20px 50px rgba(251,83,91,0.4);
-        }
-
-        .cta-note {
-            margin-top: 2rem;
-            font-size: 0.85rem;
-            color: rgba(244, 242, 239, 0.4);
-            letter-spacing: 0.05em;
         }
 
         /* FOOTER */
@@ -963,11 +1087,6 @@
             .dilemma-message {
                 order: 1;
             }
-
-            .comparison-row {
-                flex-direction: column;
-                gap: 2rem;
-            }
             
             .innovation-container {
                 grid-template-columns: 1fr;
@@ -985,19 +1104,11 @@
             .market-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
-            .perf-grid {
-                grid-template-columns: 1fr 1fr;
-            }
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-            }
-
-            .perf-grid {
-                grid-template-columns: 1fr;
             }
 
             .market-grid {
@@ -1028,12 +1139,12 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- MODAL FOR INVESTMENT DECK -->
+    <!-- MODAL FOR CONTACT -->
     <div class="modal" id="deckModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <h3>Request Investor Deck</h3>
-            <p>Please provide your email address and we'll send the pitch deck to you.</p>
+            <h3>Connect with Knack</h3>
+            <p>Let's discuss how our natural coating can transform your packaging.</p>
             <form onsubmit="sendDeckRequest(event)">
                 <div class="form-group">
                     <label>Your Name</label>
@@ -1047,7 +1158,7 @@
                     <label>Company/Organization</label>
                     <input type="text" id="userCompany" placeholder="Optional">
                 </div>
-                <button type="submit" class="submit-btn">Request Deck</button>
+                <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
     </div>
@@ -1060,15 +1171,15 @@
         <ul class="nav-links">
             <li><a href="#problem">The Dilemma</a></li>
             <li><a href="#innovation">Our Innovation</a></li>
-            <li><a href="#performance">Performance</a></li>
-            <li><a href="#invest">Invest</a></li>
+            <li><a href="#market">Market</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
     <!-- HERO -->
     <section class="hero" id="hero">
         <div class="hero-left">
-            <div class="hero-tag">Series A Investment Opportunity</div>
+            <div class="hero-tag">Plastic-free food packaging at scale</div>
             <h1>
                 The End of
                 <span>Plastic Packaging</span>
@@ -1081,7 +1192,7 @@
             
             <div class="cta-group">
                 <button class="cta-primary" onclick="openModal()">
-                    View Investment Deck
+                    Connect with Us
                     <span>→</span>
                 </button>
                 <a href="#innovation" class="cta-secondary">See the Technology</a>
@@ -1092,7 +1203,7 @@
             <div class="gradient-orb"></div>
             <div class="hero-stats-vertical">
                 <div class="stat-item">
-                    <div class="stat-number-large">29M</div>
+                    <div class="stat-number-large">140M</div>
                     <div class="stat-label-large">Tons of plastic packaging annually</div>
                 </div>
                 <div class="stat-item">
@@ -1101,7 +1212,7 @@
                 </div>
                 <div class="stat-item">
                     <div class="stat-number-large">11M</div>
-                    <div class="stat-label-large">Metric tons enter oceans yearly</div>
+                    <div class="stat-label-large">Tons enter oceans yearly</div>
                 </div>
             </div>
         </div>
@@ -1109,13 +1220,12 @@
         <div class="scroll-line"></div>
     </section>
 
-    <!-- THE DILEMMA SECTION - NEW ASYMMETRIC LAYOUT -->
+    <!-- THE DILEMMA SECTION -->
     <section id="problem" class="problem-section">
         <div style="max-width: 1400px; margin: 0 auto;">
             <span class="section-num">02 — The Dilemma</span>
             
             <div class="dilemma-container">
-                <!-- Left: Vertical Stats (Contrasts with Hero's right stats) -->
                 <div class="dilemma-stats">
                     <div class="dilemma-stat-item">
                         <div class="dilemma-stat-number">$940B</div>
@@ -1128,7 +1238,6 @@
                     </div>
                 </div>
 
-                <!-- Right: The Message (Contrasts with Hero's left text) -->
                 <div class="dilemma-message">
                     <h2>
                         <span>Paper can't protect.</span>
@@ -1136,36 +1245,6 @@
                         <span>Food goes to waste.</span>
                     </h2>
                 </div>
-            </div>
-
-            <!-- WVTR Comparison Bars -->
-            <div class="dilemma-comparison">
-                <div class="comparison-row">
-                    <div class="comparison-item">
-                        <div class="comparison-label">
-                            <span>Plastic Film</span>
-                            <span style="color: var(--sky); font-weight: 600;">1-3 g/m²/day</span>
-                        </div>
-                        <div class="comparison-bar-bg">
-                            <div class="comparison-bar-fill plastic-bar"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="comparison-item">
-                        <div class="comparison-label">
-                            <span>Current Paper Coatings</span>
-                            <span style="color: var(--watermelon); font-weight: 600;">68-80 g/m²/day</span>
-                        </div>
-                        <div class="comparison-bar-bg">
-                            <div class="comparison-bar-fill paper-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <p class="comparison-note">
-                    Paper coatings transmit <strong>25x more moisture</strong> than plastic. 
-                    Food spoils before it reaches the shelf.
-                </p>
             </div>
         </div>
     </section>
@@ -1177,12 +1256,12 @@
             <!-- LEFT: Natural Paper Wrapper with Floating Cartoon Nuts -->
             <div class="innovation-interactive">
                 <div class="paper-wrapper">
-                    <div class="freshness-indicator"> Extended Freshness</div>
+                    <div class="freshness-indicator">✓ Extended Freshness</div>
                     
                     <div class="paper-text">
                         <div class="paper-brand">Protected by Knack</div>
                         <div class="paper-badge">
-                            <span>Natural Clay Barrier</span>
+                            <span>Knack Natural Barrier</span>
                         </div>
                     </div>
                     
@@ -1197,63 +1276,74 @@
                 <div class="section-label">Our Innovation</div>
                 
                 <h2 class="catch-phrase">
-                    Clay Coated Paper.<br>
+                    Natural-coated Paper.<br>
                     <span>Plastic Performance.</span>
                 </h2>
                 
                 <p class="innovation-description">
-                    Our proprietary clay-based formulation creates a monolithic gas and moisture barrier 
-                    at the nanoscale level. Applied to standard paper substrates using existing manufacturing 
-                    infrastructure, it transforms renewable resources into high-performance packaging that 
-                    keeps food fresh longer without plastic.
+                    Our proprietary all-natural water-borne coating self-assembles into a strong moisture barrier. 
+                    Applied to standard paper substrates using existing manufacturing infrastructure, it transforms
+                    renewable resources into high-performance packaging that keeps food fresh longer without plastic.
                 </p>
+
+                <!-- PERFORMANCE VISUAL - Positioned between description and features -->
+                <div class="wvtr-performance">
+                    <div class="wvtr-title">Barrier Performance Comparison</div>
+                    
+                    <div class="performance-spectrum">
+                        <div class="spectrum-container">
+                            <div class="distance-indicator">
+                                <div class="distance-badge">25x Better than Paper</div>
+                            </div>
+                            
+                            <div class="spectrum-track">
+                                <!-- Traditional Paper -->
+                                <div class="spectrum-marker marker-paper">
+                                    <div class="marker-label">Traditional<br>Paper</div>
+                                    <div class="marker-dot"></div>
+                                    <div class="marker-sublabel">Poor Barrier</div>
+                                </div>
+                                
+                                <!-- Knack -->
+                                <div class="spectrum-marker marker-knack">
+                                    <div class="marker-label">Knack</div>
+                                    <div class="marker-dot"></div>
+                                </div>
+                                
+                                <!-- Plastic -->
+                                <div class="spectrum-marker marker-plastic">
+                                    <div class="marker-label">Plastic</div>
+                                    <div class="marker-dot"></div>
+                                    <div class="marker-sublabel">High Barrier</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wvtr-highlight">
+                        <span class="wvtr-highlight-number">~25x</span>
+                        <p class="wvtr-highlight-text">
+                            improvement over traditional paper coatings — achieving <strong>barrier performance 
+                            comparable to plastic</strong> while maintaining full biodegradability.
+                        </p>
+                    </div>
+                </div>
                 
                 <ul class="feature-list">
-                    <li>Water vapor transmission rate: <strong>4-9 g/m²/day</strong> (vs. 68-80 competitors)</li>
-                    <li>Compostable, marine biodegradable, and recyclable in paper stream</li>
-                    <li>Zero PFAS, zero plastic, fully biodegradable paper substrate</li>
-                    <li>Abundant raw material, scalable manufacturing/li>
+                    <li>Water vapor transmission rate on par with plastic's barrier performance</li>
+                    <li>100% Natural — zero PFAS, zero synthetic polymers, fully recyclable in paper streams</li>
+                    <li>Integrates with existing paper manufacturing infrastructure</li>
+                    <li>Manufactured in-house from natural feedstock</li>
                 </ul>
             </div>
 
         </div>
     </section>
 
-    <!-- PERFORMANCE -->
-    <section id="performance" class="performance-section">
-        <div class="section-num" style="max-width: 1400px; margin: 0 auto 4rem; display: block; text-align: center;">03 — Performance</div>
-        <h2 class="section-title" style="text-align: center; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; margin-bottom: 4rem;">
-            We don't reveal our formula.<br>
-            <span style="color: var(--watermelon);">Just our results.</span>
-        </h2>
-
-        <div class="perf-grid">
-            <div class="perf-card">
-                <div class="perf-value">4-9</div>
-                <div class="perf-label">Water Vapor Transmission<br><span style="opacity: 0.6;">vs. 68-80 competitors</span></div>
-            </div>
-            
-            <div class="perf-card">
-                <div class="perf-value">&lt;3</div>
-                <div class="perf-label">Micron Coating Thickness<br><span style="opacity: 0.6;">Half the thickness of plastic</span></div>
-            </div>
-            
-            <div class="perf-card">
-                <div class="perf-value">100%</div>
-                <div class="perf-label">Natural Composition<br><span style="opacity: 0.6;">Clay & mineral based</span></div>
-            </div>
-            
-            <div class="perf-card">
-                <div class="perf-value">250</div>
-                <div class="perf-label">Years Feedstock Supply<br><span style="opacity: 0.6;">Abundant reserves</span></div>
-            </div>
-        </div>
-    </section>
-
     <!-- MARKET -->
-    <section class="market-section">
+    <section class="market-section" id="market">
         <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-            <div class="section-num" style="color: rgba(255,255,255,0.8); display: block; margin-bottom: 2rem;">04 — Market Opportunity</div>
+            <div class="section-num" style="color: rgba(255,255,255,0.8); display: block; margin-bottom: 2rem;">03 — Market Opportunity</div>
             <h2 style="color: white; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; margin-bottom: 1rem;">The $950M Beachhead</h2>
             <p style="opacity: 0.9; font-size: 1.1rem;">
                 Paper mills can double profitability while eliminating plastic. 
@@ -1282,23 +1372,18 @@
     </section>
 
     <!-- CTA -->
-    <section id="invest" class="cta-section">
-        <div class="section-num" style="display: block; margin-bottom: 2rem;">05 — Investment</div>
+    <section id="contact" class="cta-section">
         <h2 class="section-title" style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 1.5rem;">Join the Paper Revolution</h2>
-        <p style="color: rgba(244, 242, 239, 0.6); max-width: 600px; margin: 0 auto 2rem;">
-            We're raising $ to scale manufacturing capacity and commercialize partnerships 
-            with global CPG brands. Backed by proven inventors who've scaled advanced materials before.
-        </p>
         
         <button class="cta-button" onclick="openModal()">
-            Contact Knack
+            Connect with Knack
         </button>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-brand">Knack Natural Materials</div>
-        <p>© 2026 Knack Natural Materials. All rights reserved. Confidential & Proprietary.</p>
+        <p>© 2026 Knack Natural Materials. All rights reserved.</p>
     </footer>
 
     <script>
@@ -1345,12 +1430,24 @@
             delay: 0.8
         });
 
+        // Animate performance spectrum on scroll
         ScrollTrigger.create({
-            trigger: ".perf-grid",
+            trigger: ".wvtr-performance",
             start: "top 80%",
             onEnter: () => {
-                document.querySelectorAll('.perf-card').forEach((card, i) => {
-                    setTimeout(() => card.classList.add('animate'), i * 200);
+                gsap.from(".marker-dot", {
+                    scale: 0,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "back.out(2)"
+                });
+                gsap.from(".distance-badge", {
+                    y: -20,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: 0.6,
+                    ease: "power2.out"
                 });
             }
         });
@@ -1370,14 +1467,14 @@
             const email = document.getElementById('userEmail').value;
             const company = document.getElementById('userCompany').value;
             
-            const subject = `Investor Deck Request from ${name}`;
-            const body = `Hello Knack Team,%0D%0A%0D%0AI would like to request the investor deck.%0D%0A%0D%0AName: ${name}%0D%0AEmail: ${email}%0D%0ACompany: ${company || 'N/A'}%0D%0A%0D%0ABest regards`;
+            const subject = `Contact Request from ${name}`;
+            const body = `Hello Knack Team,%0D%0A%0D%0AI would like to learn more about your natural coating technology.%0D%0A%0D%0AName: ${name}%0D%0AEmail: ${email}%0D%0ACompany: ${company || 'N/A'}%0D%0A%0D%0ABest regards`;
             
             window.location.href = `mailto:info@knacknatural.com?subject=${subject}&body=${body}`;
             closeModal();
             
             setTimeout(() => {
-                alert(`Thank you ${name}! Your request has been sent to info@knacknatural.com. We'll send the deck to ${email} shortly.`);
+                alert(`Thank you ${name}! We'll be in touch at ${email} shortly.`);
             }, 500);
         }
 
